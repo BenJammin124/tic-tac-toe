@@ -1,0 +1,91 @@
+body {
+  height: 97vh;
+}
+
+.board {
+  display: grid;
+  height: 300px;
+  width: 300px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 1px solid black;
+  margin: 0 auto;
+  gap: 2px;
+  padding: 2px;
+  background-color: rgb(230, 230, 230);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  border: 1px solid grey;
+  background: rgb(243, 243, 106);
+  cursor: pointer;
+}
+
+.container {
+  display: none;
+
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+.start-screen {
+  width: 70%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+}
+
+.start {
+  margin: 0 auto;
+}
+
+.score-board {
+  display: none;
+  width: 150px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.modal {
+  height: 100px;
+}
+
+.modal-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  /* position: relative; */
+}
+
+
+.modal .close {
+  width: 25px;
+  align-self: flex-end;
+  background-color: white;
+  border: none;
+  font-weight: 600; 
+  /* position: absolute; */
+  right: 0px;
+  top: 4px;
+}
