@@ -181,6 +181,23 @@ function GameController(
 
   }
 
+  const newGame = () => {
+    const board = document.querySelector('.container');
+    const startScreen = document.querySelector('.start-screen');
+    const score = document.querySelector('.score-board');
+    const playAgain = document.querySelector('.play-again');
+
+    players[0].wins = 0;
+    players[1].wins = 0;
+    players[0].name = '';
+    players[1].name = '';
+
+    playAgain.style.display = 'none';
+    startScreen.style.display = 'flex';
+    board.style.display = 'none';
+    score.style.display = 'none';
+  }
+
   printNewRound();
 
   return {
@@ -192,23 +209,24 @@ function GameController(
     checkForWin,
     checkForDraw,
     getWins,
-    reset: board.reset
+    reset: board.reset,
+    newGame
   }
 
 }
 
 function ScreenController() {
-  const p1 = document.querySelector('#p1').value;
-  const p2 = document.querySelector('#p2').value;
-  // const playAgain = document.querySelector('.play-again');
+  let p1 = document.querySelector('#p1').value;
+  let p2 = document.querySelector('#p2').value;
 
   const game = GameController(p1, p2);
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.board');
 
   const modal = document.querySelector('[data-modal]');
+  const modalWin = document.querySelector('.modal-win');
   const closeBtn = document.querySelector('.close');
-  const again = game.reset()
+  const resetBtn = document.querySelector('.reset');
 
 
   const updateScreen = () => {
@@ -232,8 +250,11 @@ function ScreenController() {
 
     if (game.checkForWin()) {
       modal.showModal();
-      playerTurnDiv.textContent = `${activePlayer.name} wins the game!`
+      modalWin.textContent = `${activePlayer.name} wins the game!`;
+      playerTurnDiv.textContent = `${activePlayer.name} wins the game!`;
     } else if (game.checkForDraw()) {
+      modal.showModal();
+      modalWin.textContent = `It's a draw!`
       playerTurnDiv.textContent = `It's a draw!`;
     } else {
       playerTurnDiv.textContent = `${activePlayer.name}'s turn...`
@@ -260,15 +281,30 @@ function ScreenController() {
   boardDiv.addEventListener("click", clickHandlerBoard);
   updateScreen();
 
-  const playAgain = document.querySelector('.play-again');
-  playAgain.addEventListener("click", (e) => {
-    console.log('click')
-    game.reset();
-    game.printNewRound();
-    boardDiv.addEventListener("click", clickHandlerBoard);
-    updateScreen();
+  closeBtn.addEventListener("click", () => {
     modal.close();
   })
+
+  const playAgain = document.querySelectorAll('.play-again');
+
+  playAgain.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      game.reset();
+      game.printNewRound();
+      boardDiv.addEventListener("click", clickHandlerBoard);
+      updateScreen();
+      modal.close();
+    })
+  })
+
+  resetBtn.addEventListener("click", () => {
+    p1.textContent = "";
+    p2.value = "";
+    game.reset();
+    game.newGame();
+    modal.close();
+  })
+
 
   return {
     updateScreen,
@@ -284,8 +320,9 @@ function startGame() {
   const board = document.querySelector('.container');
   const startScreen = document.querySelector('.start-screen');
   const score = document.querySelector('.score-board');
+  const playAgain = document.querySelector('.play-again');
 
-
+  playAgain.style.display = 'inline-block';
   startScreen.style.display = 'none';
   board.style.display = 'grid';
   score.style.display = 'flex';

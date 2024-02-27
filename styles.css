@@ -1,5 +1,6 @@
 body {
   height: 97vh;
+  font-family: "Open Sans", sans-serif;
 }
 
 .board {
@@ -12,7 +13,7 @@ body {
   margin: 0 auto;
   gap: 2px;
   padding: 2px;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(192, 174, 174);
 }
 
 .cell {
@@ -22,7 +23,7 @@ body {
   text-align: center;
   font-size: 2rem;
   border: 1px solid grey;
-  background: rgb(243, 243, 106);
+  background: rgb(247, 247, 82);
   cursor: pointer;
 }
 
@@ -57,10 +58,12 @@ h2 {
 
 .start {
   margin: 0 auto;
+  margin-top: 15px;
 }
 
 .score-board {
   display: none;
+  flex-direction: column;
   width: 150px;
   justify-content: space-between;
   margin: 0 auto;
@@ -68,6 +71,8 @@ h2 {
 
 .modal {
   height: 100px;
+  transition-timing-function: ease-in;
+  transition: .2s;
 }
 
 .modal-wrap {
@@ -84,8 +89,51 @@ h2 {
   align-self: flex-end;
   background-color: white;
   border: none;
-  font-weight: 600; 
+  font-weight: 600;
   /* position: absolute; */
   right: 0px;
   top: 4px;
+}
+
+.modal-win {
+  font-size: 16px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap div {
+  display: inline;
+}
+
+.wrap div p {
+  display: inline;
+}
+
+h3 {
+  text-align: center;
+}
+
+.play-again {
+  display: inline-block;
+}
+
+#p-a {
+  margin-top: 1rem;
+  display: none;
+}
+
+.pa-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.vs {
+  margin: 10px 15px 0px 15px;
 }
